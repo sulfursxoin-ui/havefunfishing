@@ -27,15 +27,21 @@ public class AutoFishHud implements HudRenderCallback {
             return;
         }
 
-        String stateName = controller.getState().toString();
-        String stateLabel = switch (stateName) {
-            case "IDLE"               -> "§eCasting...";
-            case "WAITING_FOR_BOBBER" -> "§eWaiting for bobber...";
-            case "FISHING"            -> "§aFishing...";
-            case "REELING_IN"         -> "§bReeling in!";
-            case "WAITING_TO_RECAST"  -> "§6Waiting to recast (" + controller.getLastDelay() + "ms)";
-            default                   -> "§7Unknown";
-        };
+        AutoFishController.State state = controller.getState();
+        String stateLabel;
+        if (state == AutoFishController.State.IDLE) {
+            stateLabel = "§eCasting...";
+        } else if (state == AutoFishController.State.WAITING_FOR_BOBBER) {
+            stateLabel = "§eWaiting for bobber...";
+        } else if (state == AutoFishController.State.FISHING) {
+            stateLabel = "§aFishing...";
+        } else if (state == AutoFishController.State.REELING_IN) {
+            stateLabel = "§bReeling in!";
+        } else if (state == AutoFishController.State.WAITING_TO_RECAST) {
+            stateLabel = "§6Waiting to recast (" + controller.getLastDelay() + "ms)";
+        } else {
+            stateLabel = "§7Unknown";
+        }
 
         context.drawText(client.textRenderer, Text.literal("§a[AutoFish: §2ON§a]"), 4, 4, 0xFFFFFF, true);
         context.drawText(client.textRenderer, Text.literal("§fState: " + stateLabel), 4, 14, 0xFFFFFF, true);
