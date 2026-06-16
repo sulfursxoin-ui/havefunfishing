@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "id": "autofish",
+  "version": "${version}",
+  "name": "AutoFish",
+  "description": "Automatic fishing mod with randomized timings for anti-detection. Compatible with Feather Client.",
+  "authors": ["AutoFish"],
+  "contact": {},
+  "license": "MIT",
+  "icon": "assets/autofish/icon.png",
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "com.autofish.mod.AutoFishMod"
+    ]
+  },
+  "mixins": [
+    "autofish.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.16.0",
+    "minecraft": "~1.21.8",
+    "java": ">=21",
+    "fabric-api": "*"
+  },
+  "suggests": {}
+}
